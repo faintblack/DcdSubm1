@@ -20,7 +20,7 @@ public class MoviesAdapter extends BaseAdapter {
         mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    // Memasukkan data film kedalam ArrayList
+    // Memasukkan data film kedalam ArrayList dari class MovieItems
     public void setData(ArrayList<MovieItems> items){
         mData = items;
         notifyDataSetChanged();
@@ -35,6 +35,10 @@ public class MoviesAdapter extends BaseAdapter {
         mData.clear();
     }
 
+    public int getViewTypeCount(){
+        return 1;
+    }
+
     @Override
     public int getCount() {
         if (mData == null){
@@ -42,6 +46,10 @@ public class MoviesAdapter extends BaseAdapter {
         } else {
             return mData.size();
         }
+    }
+
+    public int getItemViewType(int position){
+        return 0;
     }
 
     @Override
@@ -61,21 +69,21 @@ public class MoviesAdapter extends BaseAdapter {
             hold = new ViewHolder();
             convertView = mInflater.inflate(R.layout.daftar_film, null);
             hold.textJudul = (TextView)convertView.findViewById(R.id.tvJudul);
-            hold.textDeskripsi = (TextView)convertView.findViewById(R.id.tvDeskripsi);
+            hold.textSinopsis = (TextView)convertView.findViewById(R.id.tvDeskripsi);
             hold.textRilis = (TextView)convertView.findViewById(R.id.tvRilis);
             convertView.setTag(hold);
         } else {
             hold = (ViewHolder)convertView.getTag();
         }
         hold.textJudul.setText(mData.get(position).getJudul());
-        hold.textDeskripsi.setText(mData.get(position).getDeskripsi());
+        hold.textSinopsis.setText(mData.get(position).getSinopsis());
         hold.textRilis.setText(mData.get(position).getRilis());
         return convertView;
     }
 
     private static class ViewHolder{
         TextView textJudul;
-        TextView textDeskripsi;
+        TextView textSinopsis;
         TextView textRilis;
     }
 }
