@@ -5,9 +5,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.AsyncTaskLoader;
 
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.SyncHttpClient;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 public class MovieAsynctaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>> {
 
@@ -57,8 +63,39 @@ public class MovieAsynctaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>>
         SyncHttpClient netClient = new SyncHttpClient();
 
         final ArrayList<MovieItems> movieItemses = new ArrayList<>();
-        String url = "https://api.themoviedb.org/3/search/movie?api_key={" + API + "}&language=en-US&query={" + "one" + "}";;
-        return null;
+        String url = "https://api.themoviedb.org/3/search/movie?api_key={" + API + "}&language=en-US&query={" + kumpulanFilm + "}";;
+
+        netClient.get(url, new AsyncHttpResponseHandler() {
+            public void onStart(){
+                super.onStart();
+                setUseSynchronousMode(true);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                try{
+                    String hasil = new String(responseBody);
+                    JSONObject responseObject = new JSONObject(hasil);
+                    JSONArray list = responseObject.getJSONArray("result");
+
+                    for (int i = 0; i < list.length(); i++){
+                        JSONObject film = list.getJSONObject(i);
+                        MovieItems items = new MovieItems(film);
+                        movieItemses.add(items);
+                    }
+
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+        return movieItemses;
     }
 
 }
