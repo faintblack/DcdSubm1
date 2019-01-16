@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -19,12 +21,14 @@ import com.android.volley.toolbox.Volley;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getName();
 
-    private Button btnCari;
+    ImageView posterImage, backgroundImage;
+    Button btnCari;
     EditText strCari;
+    TextView tvJudul, tvDeskripsi, tvRilis;
 
     private RequestQueue mRequest;
     private StringRequest sRequest;
-    private String url = "http://www.mocky.io/v2/5c3e81473500005a003e98c3";
+    private final static String url = "http://www.mocky.io/v2/5c3e81473500005a003e98c3";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         sRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
+
                 Toast.makeText(getApplicationContext(), "Response :" + response.toString(), Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {

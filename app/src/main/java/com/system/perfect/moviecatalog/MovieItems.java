@@ -1,24 +1,44 @@
 package com.system.perfect.moviecatalog;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class MovieItems {
     private int id;
     private String judul;
-    private String kategori;
-    private String deskripsi;
+    private String genre;
+    private String sinopsis;
     private String rilis;
     private String dewasa;
     private String poster;
-    private String vote_average;
-    private String original_language;
+    private String vote;
+    private String bahasa_asli;
 
     public MovieItems(JSONObject obj){
         try{
+            // Get data from JSON
             int id = obj.getInt("id");
             String judul = obj.getString("title");
-            int id2 = obj.getJSONArray("result").getJSONObject(0).getInt("id");
-            String judul2 = obj.getJSONArray("result").getJSONObject(0).getString("title");
+            String vote = obj.getString("vote_average");
+            String poster = obj.getString("poster_path");
+            JSONArray genre_ids = obj.getJSONArray("genre_ids");
+            String genre = genre_ids.toString();
+            String bahasa_asli = obj.getString("original_language");
+            String rilis = obj.getString("release_date");
+            String sinopsis = obj.getString("overview");
+            String dewasa = obj.getString("adult");
+
+            // Set data to attribute
+            this.id = id;
+            this.judul = judul;
+            this.genre = genre;
+            this.sinopsis = sinopsis;
+            this.rilis = rilis;
+            this.dewasa = dewasa;
+            this.poster = poster;
+            this.vote = vote;
+            this.bahasa_asli = bahasa_asli;
+
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -40,20 +60,20 @@ public class MovieItems {
         this.judul = judul;
     }
 
-    public String getKategori() {
-        return kategori;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setKategori(String kategori) {
-        this.kategori = kategori;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
-    public String getDeskripsi() {
-        return deskripsi;
+    public String getSinopsis() {
+        return sinopsis;
     }
 
-    public void setDeskripsi(String deskripsi) {
-        this.deskripsi = deskripsi;
+    public void setSinopsis(String sinopsis) {
+        this.sinopsis = sinopsis;
     }
 
     public String getRilis() {
@@ -80,19 +100,19 @@ public class MovieItems {
         this.poster = poster;
     }
 
-    public String getVote_average() {
-        return vote_average;
+    public String getVote() {
+        return vote;
     }
 
-    public void setVote_average(String vote_average) {
-        this.vote_average = vote_average;
+    public void setVote(String vote) {
+        this.vote = vote;
     }
 
-    public String getOriginal_language() {
-        return original_language;
+    public String getBahasa_asli() {
+        return bahasa_asli;
     }
 
-    public void setOriginal_language(String original_language) {
-        this.original_language = original_language;
+    public void setBahasa_asli(String bahasa_asli) {
+        this.bahasa_asli = bahasa_asli;
     }
 }
