@@ -41,11 +41,9 @@ public class MoviesAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (mData == null){
-            return 0;
-        } else {
-            return mData.size();
-        }
+        if (mData == null)return 0;
+        return mData.size();
+
     }
 
     public int getItemViewType(int position){
@@ -64,20 +62,20 @@ public class MoviesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder hold = null;
+        ViewHolder holder = null;
         if (convertView == null){
-            hold = new ViewHolder();
+            holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.daftar_film, null);
-            hold.textJudul = (TextView)convertView.findViewById(R.id.tvJudul);
-            hold.textSinopsis = (TextView)convertView.findViewById(R.id.tvDeskripsi);
-            hold.textRilis = (TextView)convertView.findViewById(R.id.tvRilis);
-            convertView.setTag(hold);
+            holder.textJudul = (TextView)convertView.findViewById(R.id.tvJudul);
+            holder.textSinopsis = (TextView)convertView.findViewById(R.id.tvDeskripsi);
+            holder.textRilis = (TextView)convertView.findViewById(R.id.tvRilis);
+            convertView.setTag(holder);
         } else {
-            hold = (ViewHolder)convertView.getTag();
+            holder = (ViewHolder)convertView.getTag();
         }
-        hold.textJudul.setText(mData.get(position).getJudul());
-        hold.textSinopsis.setText(mData.get(position).getSinopsis());
-        hold.textRilis.setText(mData.get(position).getRilis());
+        holder.textJudul.setText(mData.get(position).getJudul());
+        holder.textSinopsis.setText(mData.get(position).getSinopsis());
+        holder.textRilis.setText(mData.get(position).getRilis());
         return convertView;
     }
 

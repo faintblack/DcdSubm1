@@ -65,7 +65,7 @@ public class MovieAsynctaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>>
 
         final ArrayList<MovieItems> movieItemses = new ArrayList<>();
         String url = "https://api.themoviedb.org/3/discover/movie?api_key=" + API + "&sort_by=popularity.desc";
-        String urlCari = "https://api.themoviedb.org/3/search/movie?api_key=" + API + "&language=en-US&query=" + judulFilm + "";;
+        String urlCari = "https://api.themoviedb.org/3/search/movie?api_key=" + API + "&language=en-US&query=" + judulFilm;;
         String fixUrl = "";
 
         if (TextUtils.isEmpty(judulFilm)){

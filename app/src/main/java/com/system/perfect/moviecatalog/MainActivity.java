@@ -6,6 +6,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -38,11 +39,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     final static String EXTRA_FILM = "EXTRA_FILM";
 
-    private static final String API = "a9f9c29a163472817de4426b1c8f62c7";
-    String url = "https://api.themoviedb.org/3/discover/movie?api_key={" + API + "}&sort_by=popularity.desc";
-
-    private final static String url2 = "http://www.mocky.io/v2/5c3e81473500005a003e98c3";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,12 +58,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_FILM, judulFilm);
 
-        getLoaderManager().initLoader(0, bundle, (android.app.LoaderManager.LoaderCallbacks<Object>) this);
+        getSupportLoaderManager().initLoader(0, bundle,  this);
 
         btnCari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nama_film = strCari.getText().toString().trim();
+                String judulFilm = strCari.getText().toString();
+                if (TextUtils.isEmpty(judulFilm)){
+                    return;
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(EXTRA_FILM, judulFilm);
+                    getSupportLoaderManager().restartLoader(0, bundle, MainActivity.this);
+                }
 
             }
         });
@@ -76,23 +79,31 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @NonNull
     @Override
     public Loader<ArrayList<MovieItems>> onCreateLoader(int i, @Nullable Bundle bundle) {
-        String judulFilm = bundle.getString(EXTRA_FILM);
+        String judulFilm = "";
+
+        if (bundle != null){
+            judulFilm = bundle.getString(EXTRA_FILM);
+        }
 
         proBar.setVisibility(View.VISIBLE);
         if (proBar.getVisibility() == View.VISIBLE){
             lvMovie.setVisibility(View.GONE);
         }
-        return new MovieAsynctaskLoader(this, bundle.getString(judulFilm));
+        return new MovieAsynctaskLoader(this, judulFilm);
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<ArrayList<MovieItems>> loader, ArrayList<MovieItems> movieItems) {
-
+        adapter.setData(movieItems);
+        proBar.setVisibility(View.GONE);
+        if (proBar.getVisibility() == View.GONE){
+            lvMovie.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<ArrayList<MovieItems>> loader) {
-
+        adapter.setData(null);
     }
 
 
