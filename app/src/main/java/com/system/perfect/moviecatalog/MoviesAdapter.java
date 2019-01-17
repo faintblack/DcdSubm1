@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -69,6 +72,7 @@ public class MoviesAdapter extends BaseAdapter {
             holder.textJudul = (TextView)convertView.findViewById(R.id.tvJudul);
             holder.textSinopsis = (TextView)convertView.findViewById(R.id.tvDeskripsi);
             holder.textRilis = (TextView)convertView.findViewById(R.id.tvRilis);
+            holder.poster = (ImageView)convertView.findViewById(R.id.imgFilm);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder)convertView.getTag();
@@ -76,12 +80,13 @@ public class MoviesAdapter extends BaseAdapter {
         holder.textJudul.setText(mData.get(position).getJudul());
         holder.textSinopsis.setText(mData.get(position).getSinopsis());
         holder.textRilis.setText(mData.get(position).getRilis());
+        Glide.with(context).load("http://image.tmdb.org/t/p/w185/" + mData.get(position).getPoster()).into(holder.poster);
+
         return convertView;
     }
 
     private static class ViewHolder{
-        TextView textJudul;
-        TextView textSinopsis;
-        TextView textRilis;
+        TextView textJudul, textSinopsis, textRilis;
+        ImageView poster;
     }
 }
