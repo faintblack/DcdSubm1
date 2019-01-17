@@ -85,7 +85,7 @@ public class MovieAsynctaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>>
                 Log.d("Mengambil Data Film : ", "onSuccess : Berhasil");
                 try{
                     JSONObject responseObject = new JSONObject(new String(responseBody));
-                    JSONArray hasil = responseObject.getJSONArray("result");
+                    JSONArray hasil = responseObject.getJSONArray("results");
 
                     for (int i = 0; i < hasil.length(); i++){
                         JSONObject film = hasil.getJSONObject(i);
