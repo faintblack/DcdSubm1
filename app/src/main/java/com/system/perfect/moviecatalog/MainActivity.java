@@ -56,6 +56,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         btnCari = (Button)findViewById(R.id.btn_cari);
         strCari = (EditText)findViewById(R.id.str_search);
+        proBar = (ProgressBar)findViewById(R.id.pro_bar);
+
+        String judulFilm = strCari.getText().toString();
+        Bundle bundle = new Bundle();
+        bundle.putString(EXTRA_FILM, judulFilm);
+
+        getLoaderManager().initLoader(0, bundle, (android.app.LoaderManager.LoaderCallbacks<Object>) this);
 
         btnCari.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +76,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @NonNull
     @Override
     public Loader<ArrayList<MovieItems>> onCreateLoader(int i, @Nullable Bundle bundle) {
-        return null;
+        String judulFilm = bundle.getString(EXTRA_FILM);
+
+        proBar.setVisibility(View.VISIBLE);
+        if (proBar.getVisibility() == View.VISIBLE){
+            lvMovie.setVisibility(View.GONE);
+        }
+        return new MovieAsynctaskLoader(this, bundle.getString(judulFilm));
     }
 
     @Override
