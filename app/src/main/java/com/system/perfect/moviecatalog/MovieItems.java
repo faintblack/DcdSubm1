@@ -47,8 +47,6 @@ public class MovieItems implements Parcelable {
         }
     }
 
-
-
     public int getId() {
         return id;
     }
@@ -121,6 +119,7 @@ public class MovieItems implements Parcelable {
         this.bahasa_asli = bahasa_asli;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -128,24 +127,24 @@ public class MovieItems implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.dewasa);
         dest.writeInt(this.id);
         dest.writeString(this.judul);
         dest.writeString(this.genre);
         dest.writeString(this.sinopsis);
         dest.writeString(this.rilis);
+        dest.writeString(this.dewasa);
         dest.writeString(this.poster);
         dest.writeString(this.vote);
         dest.writeString(this.bahasa_asli);
     }
 
     protected MovieItems(Parcel in) {
-        this.dewasa = in.readString();
         this.id = in.readInt();
         this.judul = in.readString();
         this.genre = in.readString();
         this.sinopsis = in.readString();
         this.rilis = in.readString();
+        this.dewasa = in.readString();
         this.poster = in.readString();
         this.vote = in.readString();
         this.bahasa_asli = in.readString();

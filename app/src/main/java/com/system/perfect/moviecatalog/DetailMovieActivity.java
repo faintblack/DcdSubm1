@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class DetailMovieActivity extends AppCompatActivity {
 
     public static final String EXTRA_FILM = "EXTRA_FILM";
@@ -32,9 +35,21 @@ public class DetailMovieActivity extends AppCompatActivity {
         Glide.with(this).load("http://image.tmdb.org/t/p/w185/" + movie.getPoster()).into(posterKecil);
         textJudul.setText(movie.getJudul());
         // textBahasa.setText(movie.getBahasa_asli());
-        textRilis.setText(movie.getRilis());
+        // textRilis.setText(movie.getRilis());
         textRating.setText(movie.getVote());
         textSinopsis.setText(movie.getSinopsis());
+
+        String rilis = movie.getRilis();
+        SimpleDateFormat formatTanggal = new SimpleDateFormat("yyyy-MM-dd");
+
+        try{
+            Date tgl = formatTanggal.parse(rilis);
+            SimpleDateFormat formatTglBaru = new SimpleDateFormat("dd MMM yyyy");
+            String tglRilis = formatTglBaru.format(tgl);
+            textRilis.setText(tglRilis);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 }

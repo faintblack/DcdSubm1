@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MoviesAdapter extends BaseAdapter {
 
@@ -81,6 +83,18 @@ public class MoviesAdapter extends BaseAdapter {
         holder.textSinopsis.setText(mData.get(position).getSinopsis());
         holder.textRilis.setText(mData.get(position).getRilis());
         Glide.with(context).load("http://image.tmdb.org/t/p/w185/" + mData.get(position).getPoster()).into(holder.poster);
+
+        String rilis = mData.get(position).getRilis();
+        SimpleDateFormat formatTanggal = new SimpleDateFormat("yyyy-MM-dd");
+
+        try{
+            Date tgl = formatTanggal.parse(rilis);
+            SimpleDateFormat formatTglBaru = new SimpleDateFormat("dd MMM yyyy");
+            String tglRilis = formatTglBaru.format(tgl);
+            holder.textRilis.setText(tglRilis);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         return convertView;
     }

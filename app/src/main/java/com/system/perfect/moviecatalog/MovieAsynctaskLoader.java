@@ -66,6 +66,7 @@ public class MovieAsynctaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>>
         final ArrayList<MovieItems> movieItemses = new ArrayList<>();
         String url = "https://api.themoviedb.org/3/discover/movie?api_key=" + API + "&sort_by=popularity.desc";
         String urlCari = "https://api.themoviedb.org/3/search/movie?api_key=" + API + "&language=en-US&query=" + judulFilm;;
+        String urlGenre = "https://api.themoviedb.org/3/genre/movie/list?api_key=" + API + "&language=en-US";
         String fixUrl = "";
 
         if (TextUtils.isEmpty(judulFilm)){
@@ -89,18 +90,7 @@ public class MovieAsynctaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>>
 
                     for (int i = 0; i < hasil.length(); i++){
                         JSONObject film = hasil.getJSONObject(i);
-                        /*
-                        String id = film.getString("id");
-                        String judul = film.getString("title");
-                        String vote = film.getString("vote_average");
-                        String poster = film.getString("poster_path");
-                        JSONArray genre_ids = film.getJSONArray("genre_ids");
-                        String genre = genre_ids.toString();
-                        String bahasa_asli = film.getString("original_language");
-                        String rilis = film.getString("release_date");
-                        String sinopsis = film.getString("overview");
-                        String dewasa = film.getString("adult");
-                        */
+                        JSONArray genre = film.getJSONArray("genre_ids");
 
                         // Memasukkan data setiap film kedalam class MovieItems
                         MovieItems items = new MovieItems(film);
