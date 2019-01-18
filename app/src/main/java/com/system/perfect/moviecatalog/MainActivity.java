@@ -68,13 +68,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onClick(View v) {
             String judulFilm = strCari.getText().toString();
-            if (TextUtils.isEmpty(judulFilm)){
-                return;
-            } else {
+
                 Bundle bundle = new Bundle();
                 bundle.putString(EXTRA_FILM, judulFilm);
                 getSupportLoaderManager().restartLoader(0, bundle, MainActivity.this);
-            }
+
             }
         });
     }

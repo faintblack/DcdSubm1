@@ -66,7 +66,6 @@ public class MovieAsynctaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>>
         final ArrayList<MovieItems> movieItemses = new ArrayList<>();
         String url = "https://api.themoviedb.org/3/discover/movie?api_key=" + API + "&sort_by=popularity.desc";
         String urlCari = "https://api.themoviedb.org/3/search/movie?api_key=" + API + "&language=en-US&query=" + judulFilm;;
-        String urlGenre = "https://api.themoviedb.org/3/genre/movie/list?api_key=" + API + "&language=en-US";
         String fixUrl = "";
 
         if (TextUtils.isEmpty(judulFilm)){
@@ -80,7 +79,6 @@ public class MovieAsynctaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>>
                 super.onStart();
                 setUseSynchronousMode(true);
             }
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 Log.d("Mengambil Data Film : ", "onSuccess : Berhasil");
@@ -90,7 +88,6 @@ public class MovieAsynctaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>>
 
                     for (int i = 0; i < hasil.length(); i++){
                         JSONObject film = hasil.getJSONObject(i);
-                        JSONArray genre = film.getJSONArray("genre_ids");
 
                         // Memasukkan data setiap film kedalam class MovieItems
                         MovieItems items = new MovieItems(film);
@@ -100,14 +97,12 @@ public class MovieAsynctaskLoader extends AsyncTaskLoader<ArrayList<MovieItems>>
                 } catch (Exception e){
                     e.printStackTrace();
                 }
-
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
             }
         });
+
         return movieItemses;
     }
 

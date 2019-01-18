@@ -25,43 +25,46 @@
         <ImageView
             android:id="@+id/posterSmall"
             android:layout_width="wrap_content"
-            android:layout_height="100dp" />
+            android:layout_height="120dp" />
         <LinearLayout
             android:layout_marginLeft="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 android:text="Judul Film"
                 android:id="@+id/tvDetailJudul"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <LinearLayout
-                android:weightSum="2"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_weight="1"
                     android:layout_marginTop="@dimen/vertical_margin"
                     android:layout_marginRight="@dimen/horizontal_margin"
                     android:orientation="vertical"
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content">
                     <!--<TextView
-                        android:text="Original Language :"
-                        android:id="@+id/tvKetBahasa"
+                        android:text="Genre :"
+                        android:id="@+id/tvGenre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />-->
                     <TextView
+                        android:textColor="#000"
                         android:text="Release Date"
                         android:layout_marginTop="@dimen/vertical_margin"
                         android:id="@+id/tvKetRilis"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:textColor="#000"
                         android:text="Rating"
                         android:id="@+id/tvKetRating"
                         android:layout_marginTop="@dimen/vertical_margin"
@@ -69,7 +72,6 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_weight="1"
                     android:layout_marginTop="@dimen/vertical_margin"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -79,11 +81,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />-->
                     <TextView
+                        android:textColor="#000"
                         android:id="@+id/tvDetailRilis"
                         android:layout_marginTop="@dimen/vertical_margin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:textColor="#000"
                         android:id="@+id/tvDetailRating"
                         android:layout_marginTop="@dimen/vertical_margin"
                         android:layout_width="match_parent"
@@ -97,6 +101,9 @@
     </LinearLayout>
 
     <TextView
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="15dp"
         android:layout_marginTop="@dimen/vertical_margin"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
@@ -109,6 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
+            android:textColor="#000"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:id="@+id/tvDetailSinopsis"

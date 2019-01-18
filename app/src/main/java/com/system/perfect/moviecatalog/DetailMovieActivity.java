@@ -13,7 +13,7 @@ import java.util.Date;
 public class DetailMovieActivity extends AppCompatActivity {
 
     public static final String EXTRA_FILM = "EXTRA_FILM";
-    TextView textJudul, textBahasa, textRilis, textRating, textSinopsis;
+    TextView textJudul, textGenre, textRilis, textRating, textSinopsis;
     ImageView poster, posterKecil;
 
     @Override
@@ -22,7 +22,7 @@ public class DetailMovieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_movie);
 
         textJudul = findViewById(R.id.tvDetailJudul);
-        // textBahasa = findViewById(R.id.tvDetailBahasa);
+        //textGenre = findViewById(R.id.tvGenre);
         textRilis = findViewById(R.id.tvDetailRilis);
         textRating = findViewById(R.id.tvDetailRating);
         textSinopsis = findViewById(R.id.tvDetailSinopsis);
@@ -31,10 +31,12 @@ public class DetailMovieActivity extends AppCompatActivity {
 
         MovieItems movie = getIntent().getParcelableExtra(EXTRA_FILM);
 
+        getSupportActionBar().setTitle(movie.getJudul());
+
         Glide.with(this).load("http://image.tmdb.org/t/p/original/" + movie.getPoster()).into(poster);
         Glide.with(this).load("http://image.tmdb.org/t/p/w185/" + movie.getPoster()).into(posterKecil);
         textJudul.setText(movie.getJudul());
-        // textBahasa.setText(movie.getBahasa_asli());
+        // textGenre.setText(movie.getGenre());
         // textRilis.setText(movie.getRilis());
         textRating.setText(movie.getVote());
         textSinopsis.setText(movie.getSinopsis());

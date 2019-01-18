@@ -2,9 +2,9 @@ package com.system.perfect.moviecatalog;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.util.ArrayList;
 
 public class MovieItems implements Parcelable {
     private int id;
@@ -25,7 +25,8 @@ public class MovieItems implements Parcelable {
             String vote = obj.getString("vote_average");
             String poster = obj.getString("poster_path");
             JSONArray genre_ids = obj.getJSONArray("genre_ids");
-            String genre = genre_ids.toString();
+            ArrayList<String> gen = new ArrayList<String>();
+            String genre = gen.toString();
             String bahasa_asli = obj.getString("original_language");
             String rilis = obj.getString("release_date");
             String sinopsis = obj.getString("overview");

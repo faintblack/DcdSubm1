@@ -81,7 +81,7 @@ public class MoviesAdapter extends BaseAdapter {
         }
         holder.textJudul.setText(mData.get(position).getJudul());
         holder.textSinopsis.setText(mData.get(position).getSinopsis());
-        holder.textRilis.setText(mData.get(position).getRilis());
+        //holder.textRilis.setText(mData.get(position).getRilis());
         Glide.with(context).load("http://image.tmdb.org/t/p/w185/" + mData.get(position).getPoster()).into(holder.poster);
 
         String rilis = mData.get(position).getRilis();
@@ -91,7 +91,7 @@ public class MoviesAdapter extends BaseAdapter {
             Date tgl = formatTanggal.parse(rilis);
             SimpleDateFormat formatTglBaru = new SimpleDateFormat("dd MMM yyyy");
             String tglRilis = formatTglBaru.format(tgl);
-            holder.textRilis.setText(tglRilis);
+            holder.textRilis.setText("Release date : " + tglRilis);
         } catch (Exception e){
             e.printStackTrace();
         }
