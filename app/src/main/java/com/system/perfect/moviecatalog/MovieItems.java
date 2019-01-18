@@ -1,9 +1,12 @@
 package com.system.perfect.moviecatalog;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class MovieItems {
+public class MovieItems implements Parcelable {
     private int id;
     private String judul;
     private String genre;
@@ -43,6 +46,8 @@ public class MovieItems {
             e.printStackTrace();
         }
     }
+
+
 
     public int getId() {
         return id;
@@ -115,4 +120,46 @@ public class MovieItems {
     public void setBahasa_asli(String bahasa_asli) {
         this.bahasa_asli = bahasa_asli;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.dewasa);
+        dest.writeInt(this.id);
+        dest.writeString(this.judul);
+        dest.writeString(this.genre);
+        dest.writeString(this.sinopsis);
+        dest.writeString(this.rilis);
+        dest.writeString(this.poster);
+        dest.writeString(this.vote);
+        dest.writeString(this.bahasa_asli);
+    }
+
+    protected MovieItems(Parcel in) {
+        this.dewasa = in.readString();
+        this.id = in.readInt();
+        this.judul = in.readString();
+        this.genre = in.readString();
+        this.sinopsis = in.readString();
+        this.rilis = in.readString();
+        this.poster = in.readString();
+        this.vote = in.readString();
+        this.bahasa_asli = in.readString();
+    }
+
+    public static final Parcelable.Creator<MovieItems> CREATOR = new Parcelable.Creator<MovieItems>() {
+        @Override
+        public MovieItems createFromParcel(Parcel source) {
+            return new MovieItems(source);
+        }
+
+        @Override
+        public MovieItems[] newArray(int size) {
+            return new MovieItems[size];
+        }
+    };
 }

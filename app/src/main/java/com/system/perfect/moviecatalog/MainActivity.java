@@ -1,5 +1,6 @@
 package com.system.perfect.moviecatalog;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -52,18 +54,28 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         getSupportLoaderManager().initLoader(0, bundle,  this);
 
+        lvMovie.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MovieItems item = (MovieItems)parent.getItemAtPosition(position);
+
+                Intent detailMovieIntent = new Intent(MainActivity.this,DetailMovieActivity.class);
+                detailMovieIntent.putExtra(DetailMovieActivity.EXTRA_FILM, item);
+                startActivity(detailMovieIntent);
+            }
+        });
+
         btnCari.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String judulFilm = strCari.getText().toString();
-                if (TextUtils.isEmpty(judulFilm)){
-                    return;
-                } else {
-                    Bundle bundle = new Bundle();
-                    bundle.putString(EXTRA_FILM, judulFilm);
-                    getSupportLoaderManager().restartLoader(0, bundle, MainActivity.this);
-                }
-
+            String judulFilm = strCari.getText().toString();
+            if (TextUtils.isEmpty(judulFilm)){
+                return;
+            } else {
+                Bundle bundle = new Bundle();
+                bundle.putString(EXTRA_FILM, judulFilm);
+                getSupportLoaderManager().restartLoader(0, bundle, MainActivity.this);
+            }
             }
         });
     }
